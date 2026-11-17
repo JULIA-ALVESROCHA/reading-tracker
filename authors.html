@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Authors · Reading Tracker</title>
+  <link rel="icon" href="data:,">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600&display=swap">
+  <link rel="stylesheet" href="css/style.css">
+  <script type="module" src="js/pages/authors.js"></script>
+</head>
+<body data-page="authors">
+  <div class="shell">
+  <a class="skip-link" href="#main" data-i18n="app.skip"></a>
+  <aside class="sidebar">
+    <a class="logo" href="index.html" data-i18n-label="app.name"><span class="logo-book" aria-hidden="true"></span></a>
+    <nav class="side-nav" data-i18n-label="nav.label">
+      <ul>
+        <li><a href="index.html" data-nav="log" class="side-link"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="3" y="3" width="8" height="8" rx="2" class="i-red"/><rect x="13" y="3" width="8" height="8" rx="2" class="i-green"/><rect x="3" y="13" width="8" height="8" rx="2" class="i-blue"/><rect x="13" y="13" width="8" height="8" rx="2" class="i-yellow"/></svg><span class="side-label" data-i18n="nav.log"></span></a></li>
+        <li><a href="books.html" data-nav="books" class="side-link"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 4.5A1.5 1.5 0 0 1 6.5 3H19v15H6.5A1.5 1.5 0 0 0 5 19.5v-15Z"/><path d="M5 19.5A1.5 1.5 0 0 0 6.5 21H19v-3"/><path d="M9 7h6"/></svg><span class="side-label" data-i18n="nav.books"></span></a></li>
+        <li><a href="authors.html" data-nav="authors" class="side-link"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="8" r="4"/><path d="M4 21c1.2-4 4.3-6 8-6s6.8 2 8 6"/></svg><span class="side-label" data-i18n="nav.authors"></span></a></li>
+      </ul>
+    </nav>
+    <button type="button" id="reset-data" class="reset-pill"><span class="reset-icon"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 12a8 8 0 1 0 2.4-5.7"/><path d="M4 4v5h5"/></svg></span><span class="reset-label" data-i18n="nav.reset"></span></button>
+  </aside>
+    <main id="main" class="main">
+      <!-- Shown only if JavaScript cannot start (e.g. page opened from file://). ui.js removes it.
+           This one message stays in HTML because strings.js cannot load in that case. -->
+      <div class="boot-notice" id="boot-notice" role="alert">
+        <strong>The app could not start.</strong>
+        <p>Open it through a local server, not by double-clicking the file. In Terminal: <code>cd</code> into this folder, run <code>python3 -m http.server 8000</code>, then open <code>http://localhost:8000</code>. Or use VS Code Live Server.</p>
+      </div>
+      <div class="topbar">
+        <form class="search-pill" role="search" id="authors-search-form">
+          <label for="authors-search" class="visually-hidden" data-i18n="authors.searchLabel"></label>
+          <span class="search-icon"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg></span>
+          <input type="search" id="authors-search" autocomplete="off" data-i18n-placeholder="authors.searchLabel">
+          <button type="submit" class="search-button" data-i18n="common.search"></button>
+        </form>
+        <button type="button" id="new-author" class="round-action" data-i18n-label="authors.newAuthor" data-i18n-title="authors.newAuthor"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 5v14M5 12h14"/></svg></button>
+      </div>
+      <div class="section-head page-title">
+        <div>
+          <h1 data-i18n="authors.title"></h1>
+          <p class="lead" data-i18n="authors.intro"></p>
+        </div>
+        <p class="count" id="authors-count" aria-live="polite"></p>
+      </div>
+      <div class="table-wrap" id="authors-table"></div>
+    </main>
+  </div>
+</body>
+</html>

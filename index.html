@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Reading log · Reading Tracker</title>
+  <link rel="icon" href="data:,">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600&display=swap">
+  <link rel="stylesheet" href="css/style.css">
+  <script type="module" src="js/pages/log.js"></script>
+</head>
+<body data-page="log">
+  <div class="shell has-aside">
+  <a class="skip-link" href="#main" data-i18n="app.skip"></a>
+  <aside class="sidebar">
+    <a class="logo" href="index.html" data-i18n-label="app.name"><span class="logo-book" aria-hidden="true"></span></a>
+    <nav class="side-nav" data-i18n-label="nav.label">
+      <ul>
+        <li><a href="index.html" data-nav="log" class="side-link"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="3" y="3" width="8" height="8" rx="2" class="i-red"/><rect x="13" y="3" width="8" height="8" rx="2" class="i-green"/><rect x="3" y="13" width="8" height="8" rx="2" class="i-blue"/><rect x="13" y="13" width="8" height="8" rx="2" class="i-yellow"/></svg><span class="side-label" data-i18n="nav.log"></span></a></li>
+        <li><a href="books.html" data-nav="books" class="side-link"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 4.5A1.5 1.5 0 0 1 6.5 3H19v15H6.5A1.5 1.5 0 0 0 5 19.5v-15Z"/><path d="M5 19.5A1.5 1.5 0 0 0 6.5 21H19v-3"/><path d="M9 7h6"/></svg><span class="side-label" data-i18n="nav.books"></span></a></li>
+        <li><a href="authors.html" data-nav="authors" class="side-link"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="8" r="4"/><path d="M4 21c1.2-4 4.3-6 8-6s6.8 2 8 6"/></svg><span class="side-label" data-i18n="nav.authors"></span></a></li>
+      </ul>
+    </nav>
+    <button type="button" id="reset-data" class="reset-pill"><span class="reset-icon"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 12a8 8 0 1 0 2.4-5.7"/><path d="M4 4v5h5"/></svg></span><span class="reset-label" data-i18n="nav.reset"></span></button>
+  </aside>
+    <main id="main" class="main">
+      <!-- Shown only if JavaScript cannot start (e.g. page opened from file://). ui.js removes it.
+           This one message stays in HTML because strings.js cannot load in that case. -->
+      <div class="boot-notice" id="boot-notice" role="alert">
+        <strong>The app could not start.</strong>
+        <p>Open it through a local server, not by double-clicking the file. In Terminal: <code>cd</code> into this folder, run <code>python3 -m http.server 8000</code>, then open <code>http://localhost:8000</code>. Or use VS Code Live Server.</p>
+      </div>
+      <div class="topbar">
+        <form class="search-pill" role="search" id="log-search-form">
+          <label for="log-search" class="visually-hidden" data-i18n="log.searchLabel"></label>
+          <span class="search-icon"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg></span>
+          <input type="search" id="log-search" autocomplete="off" data-i18n-placeholder="log.searchLabel">
+          <button type="submit" class="search-button" data-i18n="common.search"></button>
+        </form>
+        <button type="button" id="new-book" class="round-action" data-i18n-label="log.newBook" data-i18n-title="log.newBook"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 5v14M5 12h14"/></svg></button>
+      </div>
+      <h1 class="visually-hidden" data-i18n="log.title"></h1>
+      <div class="chip-row" id="log-status" role="group" data-i18n-label="log.statusFilter"></div>
+
+      <section class="shelf" aria-labelledby="recent-heading">
+        <div class="section-head">
+          <h2 id="recent-heading" data-i18n="log.recent"></h2>
+          <div class="head-actions">
+            <a href="#log-section" class="pill-link" data-i18n="log.viewAll"></a>
+            <button type="button" class="arrow-button" id="shelf-prev" data-i18n-label="log.previous">‹</button>
+            <button type="button" class="arrow-button" id="shelf-next" data-i18n-label="log.next">›</button>
+          </div>
+        </div>
+        <ul class="cover-row" id="recent-covers"></ul>
+      </section>
+
+      <section class="banner" aria-labelledby="banner-heading">
+        <div class="stack" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span><span></span></div>
+        <div class="banner-text">
+          <h2 id="banner-heading"></h2>
+          <p id="banner-lead"></p>
+          <a href="#log-section" class="coral-button" data-i18n="log.openLog"></a>
+        </div>
+        <ul class="mini-cards" id="banner-cards"></ul>
+      </section>
+
+      <section class="log-section" id="log-section" aria-labelledby="log-heading">
+        <div class="section-head">
+          <h2 id="log-heading" data-i18n="log.title"></h2>
+          <p class="count" id="log-count" aria-live="polite"></p>
+        </div>
+        <div class="table-wrap" id="log-table"></div>
+      </section>
+    </main>
+    <aside class="side-panel" aria-labelledby="wishlist-heading">
+      <div class="panel-head">
+        <h2 id="wishlist-heading" data-i18n="wishlist.title"></h2>
+        <span class="dots" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+      </div>
+      <div class="panel-body">
+        <a class="panel-card" id="now-reading" href="books.html">
+          <span>
+            <strong data-i18n="wishlist.nowReading"></strong>
+            <span id="now-reading-title"></span>
+          </span>
+          <span class="panel-arrow" aria-hidden="true">›</span>
+        </a>
+        <ul class="bubbles" id="wishlist"></ul>
+      </div>
+      <form class="quick-add" id="quick-add">
+        <label for="quick-add-title" class="visually-hidden" data-i18n="wishlist.quickAddLabel"></label>
+        <input type="text" id="quick-add-title" autocomplete="off" data-i18n-placeholder="wishlist.quickAddPlaceholder">
+        <button type="submit" class="send-button" data-i18n-label="wishlist.quickAddLabel"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M21 3 10 14"/><path d="m21 3-7 18-4-7-7-4 18-7Z"/></svg></button>
+      </form>
+    </aside>
+  </div>
+</body>
+</html>
