@@ -106,10 +106,3 @@ New records get the next integer ID after the highest existing one.
 - **Book:** title required; authors only from existing records, no duplicates; publication year an integer, not 0, not in the future, negative for BC, and not later than any year read of its readings; form, mode and content from their lists; themes from existing records, no duplicates.
 - **Reading:** book required; status required and from the list; year read required for Read, optional for Abandoned, empty otherwise, not in the future and not earlier than the publication year; grade only for Read or Abandoned, 0.0 to 10.0 in steps of 0.5; priority only for Want to read.
 
-## AI usage
-
-| Tool | Used for | Parts affected |
-| --- | --- | --- |
-| Claude (Anthropic) | Generated the first version of the frontend code, styles and this README from the assignment statement, then an automated browser test of the requirements | All files in `js/`, `css/style.css`, the HTML pages, `README.md` |
-
-All code was reviewed, run and tested by the team. `TODO: describe what you changed or wrote yourself.`
